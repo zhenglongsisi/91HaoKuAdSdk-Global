@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.breakdawn.ky"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+
+        manifestPlaceholders = [
+                HK_APP_ID                     : "33",
+                HK_APP_KEY                    : "id4miapif6spvnh5lw6mev2oinkm6k96",
+                GOOGLE_APP_ID                 : "ca-app-pub-2531509893280386~9457857584",
+                FACEBOOK_APP_ID               : "fb611082079810114"
+        ]
+
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            storeFile file('../xinyou.jks')
+            storePassword properties.getProperty('signing.password')
+            keyAlias properties.getProperty('signing.keyAlias')
+            keyPassword properties.getProperty('signing.keyPassword')
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "91好酷广告SDK海外版示例.apk"
+            }
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //91Haoku SDK
+    implementation(name: 'sdk-release', ext: 'aar')
+    //Google AdMob
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    //facebook analyzer sdk
+    implementation 'com.facebook.android:facebook-core:5.8.0'
+    //facebook audience network
+    implementation 'com.facebook.android:audience-network-sdk:5.10.1'
+
+    //noinspection GradleDependency
+    implementation 'com.squareup.okhttp3:okhttp:3.12.3'
+    //noinspection GradleDependency
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.3"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+
+}

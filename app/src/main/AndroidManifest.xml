@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.haoku.global.minisdk.sample">
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--HaoKu SDK AppId-->
+        <meta-data
+            android:name="HK_APP_ID"
+            android:value="${HK_APP_ID}" />
+        <!--HaoKu SDK AppKey-->
+        <meta-data
+            android:name="HK_APP_KEY"
+            android:value="${HK_APP_KEY}" />
+        <!--Google AppId-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${GOOGLE_APP_ID}" />
+        <!--Facebook AppId-->
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="${FACEBOOK_APP_ID}"/>
+
+    </application>
+
+</manifest>
